@@ -5,7 +5,7 @@ import './App.css';
 function Frase({frase}) {
   return(
     <div>
-      <h1>{frase.advice}</h1>
+      <h1>{frase}</h1>
     </div>
   );
 }
@@ -13,20 +13,20 @@ function Frase({frase}) {
 function App() {
 
   // state
-  const [frase, obtenerFrase] = useState({});
+  const [cita, obtenercita] = useState('');
   // console.log(frase);
 
-  const consultarApi = async () => {
+  const consultarApiCita = async () => {
     const url = 'https://api.adviceslip.com/advice';
     const resultado = await axios(url);
 
     // console.log("resultado ", resultado.data.slip.advice); para ir comprobando el resultado.
-     obtenerFrase(resultado.data.slip);
+    obtenercita(resultado.data.slip.advice);
   }
 
   useEffect(
     () => {
-      consultarApi()
+      consultarApiCita()
     },[]
   )
 
@@ -34,8 +34,8 @@ function App() {
 
   return (
     <div className="App">
-      <Frase frase={frase} />
-      <button onClick={consultarApi}>Nueva Cita</button>
+      <Frase frase={cita} />
+      <button onClick={consultarApiCita}>Nueva Cita</button>
     </div>
   );
 }
