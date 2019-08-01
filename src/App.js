@@ -2,6 +2,14 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
 
+function Frase({frase}) {
+  return(
+    <div>
+      <h1>{frase.advice}</h1>
+    </div>
+  );
+}
+
 function App() {
 
   // state
@@ -26,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      La Frase va aqui
+      <Frase frase={frase} /> 
     </div>
   );
 }
