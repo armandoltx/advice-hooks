@@ -30,11 +30,12 @@ function App() {
     },[]
   )
 
-  console.log("frase ", frase);
+  // console.log("frase ", frase);
 
   return (
     <div className="App">
-      <Frase frase={frase} /> 
+      <Frase frase={frase} />
+      <button onClick={consultarApi}>Nueva Cita</button>
     </div>
   );
 }
