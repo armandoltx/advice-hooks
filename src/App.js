@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import './App.css';
 
 function Frase({frase}) {
   return(
-    <div>
+    <div className="frase">
       <h1>{frase}</h1>
     </div>
   );
@@ -13,7 +12,7 @@ function Frase({frase}) {
 function App() {
 
   // state
-  const [cita, obtenercita] = useState('');
+  const [cita, obtenerCita] = useState('');
   // console.log(frase);
 
   const consultarApiCita = async () => {
@@ -21,7 +20,7 @@ function App() {
     const resultado = await axios(url);
 
     // console.log("resultado ", resultado.data.slip.advice); para ir comprobando el resultado.
-    obtenercita(resultado.data.slip.advice);
+    obtenerCita(resultado.data.slip.advice);
   }
 
   useEffect(
@@ -33,7 +32,7 @@ function App() {
   // console.log("frase ", frase);
 
   return (
-    <div className="App">
+    <div className="contenedor">
       <Frase frase={cita} />
       <button onClick={consultarApiCita}>Nueva Cita</button>
     </div>
