@@ -14,6 +14,7 @@ function App() {
   // state
   const [cita, obtenerCita] = useState('');
   // console.log(frase);
+  const [imagen, obtenerImagen] = useState('');
 
   const consultarApiCita = async () => {
     const url = 'https://api.adviceslip.com/advice';
@@ -23,18 +24,53 @@ function App() {
     obtenerCita(resultado.data.slip.advice);
   }
 
+  const consultarApiImagen = async () => {
+    const url = 'https://source.unsplash.com/random/900×900/?coffee';
+
+    // query con fetch api
+    fetch(url)
+      .then(respuesta => {
+        // console.log("respuesta dentro de fetch ", fetch);
+        return respuesta;
+      })
+      .then(foto => {
+        // console.log("imagen en fetch ", foto.url);
+        obtenerImagen(foto.url);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
   useEffect(
     () => {
       consultarApiCita()
+      consultarApiImagen()
     },[]
   )
 
+  const change = () => {
+    consultarApiCita();
+    consultarApiImagen();
+  }
+
+  // css inline
+  let sectionStyle = {
+    backgroundImage: `url(${imagen})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+
+  }
+
   // console.log("frase ", frase);
+  // console.log("imagen ", imagen);
 
   return (
-    <div className="contenedor">
-      <Frase frase={cita} />
-      <button onClick={consultarApiCita}>Nueva Cita</button>
+    <div className="wrapper" style={sectionStyle}>
+      <div className="contenedor">
+        <Frase frase={cita} />
+        <button onClick={change}>Nueva Cita</button>
+      </div>
     </div>
   );
 }
